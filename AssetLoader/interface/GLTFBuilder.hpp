@@ -457,7 +457,7 @@ Mesh* ModelBuilder::LoadMesh(const GltfModelType& GltfModel,
     NewMesh.UpdateBoundingBox();
 
     if (m_CI.MeshLoadCallback)
-        m_CI.MeshLoadCallback(&GltfMesh.Get(), NewMesh);
+        m_CI.MeshLoadCallback(static_cast<const void*>(&GltfModel.Model), &GltfMesh.Get(), NewMesh);
 
     return &NewMesh;
 }
@@ -592,8 +592,8 @@ auto ModelBuilder::GetGltfDataInfo(const GltfModelType& GltfModel, int AccessorI
     const auto  SrcCount      = GltfAccessor.GetCount();
     const auto  SrcByteStride = GltfAccessor.GetByteStride(GltfView);
     const auto* pSrcData      = SrcCount > 0 ?
-        GltfBuffer.GetData(GltfAccessor.GetByteOffset() + GltfView.GetByteOffset()) :
-        nullptr;
+             GltfBuffer.GetData(GltfAccessor.GetByteOffset() + GltfView.GetByteOffset()) :
+             nullptr;
 
     struct GltfDataInfo
     {

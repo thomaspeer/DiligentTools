@@ -661,7 +661,7 @@ struct ModelCreateInfo
     ///             depending on the loader it is using (e.g. tinygltf::Node*).
     NodeLoadCallbackType NodeLoadCallback = nullptr;
 
-    using MeshLoadCallbackType = std::function<void(const void* pSrcMesh, Mesh& DstMesh)>;
+    using MeshLoadCallbackType = std::function<void(const void* pSrcModel, const void* pSrcMesh, Mesh& DstMesh)>;
     /// User-provided mesh loading callback function that will be called for
     /// every mesh being loaded.
     ///
